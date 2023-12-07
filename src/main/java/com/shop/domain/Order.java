@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.util.ObjectUtils;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class Order {
     private Member member;
     private LocalDateTime orderDate;
     private OrderStatus orderStatus;
-    private List<OrderItem> orderItems = new ArrayList<>();
+    private List<OrderItem> orderItems;
     private LocalDateTime regTime;
     private LocalDateTime updateTime;
 
@@ -28,8 +29,29 @@ public class Order {
         this.member = member;
         this.orderDate = orderDate;
         this.orderStatus = orderStatus;
-        this.orderItems = orderItems;
+        this.orderItems = ObjectUtils.isEmpty(orderItems) ? new ArrayList<>() : orderItems;
         this.regTime = regTime;
         this.updateTime = updateTime;
+    }
+
+    public static Order createOrder(Member member, List<OrderItem> orderItemList) {
+        Order order = Order.builder()
+                .member(member)
+                .orderStatus(OrderStatus.ORDER)
+                .orderDate(LocalDateTime.now())
+                .build();
+
+
+        for(OrderItem orderItem : orderItemList) {
+            order.addOrderItem(orderItem);
+        }
+
+        order.setOrderStatus(OrderStatus.ORDER);
+        order.setOrderDate(LocalDateTime.now());
+        return order;
+    }
+
+    public void addOrderItem(OrderItem orderItem) {
+        this.orderItems.add(orderItem);
     }
 }

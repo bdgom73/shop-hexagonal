@@ -1,10 +1,10 @@
 package com.shop.application.port.in.member;
 
-import com.shop.adapter.in.web.dto.input.MemberInput;
 import com.shop.application.dto.MemberDto;
+import com.shop.application.dto.request.MemberRequest;
 
 public interface SignupMemberUseCase {
 
-    MemberDto signup(MemberInput input);
+    MemberDto signup(MemberRequest request);
 
 }

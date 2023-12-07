@@ -1,7 +1,7 @@
 package com.shop.application.service;
 
-import com.shop.adapter.in.web.dto.input.MemberInput;
 import com.shop.application.dto.MemberDto;
+import com.shop.application.dto.request.MemberRequest;
 import com.shop.application.port.in.member.SignupMemberUseCase;
 import com.shop.application.port.out.member.CommandMemberPort;
 import com.shop.application.port.out.member.LoadMemberPort;
@@ -30,10 +30,10 @@ public class MemberService
 
     @Override
     @Transactional
-    public MemberDto signup(MemberInput input) {
-        validateDuplicateMember(input);
-        input.setPassword(passwordEncoder.encode(input.getPassword()));
-        Member member = commandMemberPort.save(input.toDomain());
+    public MemberDto signup(MemberRequest request) {
+        validateDuplicateMember(request);
+        request.setPassword(passwordEncoder.encode(request.getPassword()));
+        Member member = commandMemberPort.save(request.toDomain());
         return new MemberDto(member);
     }
 
@@ -56,11 +56,11 @@ public class MemberService
 
     /**
      * 회원 가입 시 이메일 중복을 검사
-     * @param input 회원 정보를 담고 있는 객체
+     * @param request 회원 정보를 담고 있는 객체
      * @throws IllegalStateException 이미 가입된 회원인 경우 발생 하는 예외
      */
-    private void validateDuplicateMember(MemberInput input){
-        Optional<Member> member = loadMemberPort.loadByEmail(input.getEmail());
+    private void validateDuplicateMember(MemberRequest request){
+        Optional<Member> member = loadMemberPort.loadByEmail(request.getEmail());
 
         if(member.isPresent()) {
             throw new IllegalStateException("이미 가입된 회원 입니다.");
