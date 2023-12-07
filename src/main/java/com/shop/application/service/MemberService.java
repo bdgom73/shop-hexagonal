@@ -2,9 +2,9 @@ package com.shop.application.service;
 
 import com.shop.adapter.in.web.dto.input.MemberInput;
 import com.shop.application.dto.MemberDto;
-import com.shop.application.port.in.SignupMemberUseCase;
-import com.shop.application.port.out.CommandMemberPort;
-import com.shop.application.port.out.LoadMemberPort;
+import com.shop.application.port.in.member.SignupMemberUseCase;
+import com.shop.application.port.out.member.CommandMemberPort;
+import com.shop.application.port.out.member.LoadMemberPort;
 import com.shop.domain.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;

@@ -1,4 +1,4 @@
-package com.shop.application.port.out;
+package com.shop.application.port.out.member;
 
 import com.shop.domain.Member;
 

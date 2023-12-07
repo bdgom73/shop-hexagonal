@@ -1,4 +1,4 @@
-package com.shop.application.port.in;
+package com.shop.application.port.in.member;
 
 import com.shop.adapter.in.web.dto.input.MemberInput;
 import com.shop.application.dto.MemberDto;
