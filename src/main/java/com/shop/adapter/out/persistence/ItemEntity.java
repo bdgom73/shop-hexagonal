@@ -11,7 +11,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Item extends BaseEntity {
+public class ItemEntity extends BaseEntity {
 
     @Id
     @Column(name="item_id")

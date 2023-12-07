@@ -5,13 +5,12 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Entity
 @Table(name="member")
 @Getter @Setter
 @ToString
-public class Member extends BaseEntity {
+public class MemberEntity extends BaseEntity {
 
     @Id
     @Column(name="member_id")

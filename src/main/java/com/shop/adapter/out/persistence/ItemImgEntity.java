@@ -7,7 +7,7 @@ import lombok.Setter;
 @Entity
 @Table(name="item_img")
 @Getter @Setter
-public class ItemImg extends BaseEntity{
+public class ItemImgEntity extends BaseEntity{
 
     @Id
     @Column(name="item_img_id")
@@ -24,7 +24,7 @@ public class ItemImg extends BaseEntity{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
-    private Item item;
+    private ItemEntity item;
 
     public void updateItemImg(String oriImgName, String imgName, String imgUrl){
         this.oriImgName = oriImgName;
