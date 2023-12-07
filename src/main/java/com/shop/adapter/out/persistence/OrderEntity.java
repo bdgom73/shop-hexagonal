@@ -2,8 +2,11 @@ package com.shop.adapter.out.persistence;
 
 import com.shop.adapter.out.constant.OrderStatus;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.util.ObjectUtils;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -12,6 +15,7 @@ import java.util.List;
 @Entity
 @Table(name = "orders")
 @Getter @Setter
+@NoArgsConstructor
 public class OrderEntity extends BaseEntity {
 
     @Id @GeneratedValue
@@ -22,18 +26,27 @@ public class OrderEntity extends BaseEntity {
     @JoinColumn(name = "member_id")
     private MemberEntity member;
 
-    private LocalDateTime orderDate; //주문일
+    private LocalDateTime orderDate;
 
     @Enumerated(EnumType.STRING)
-    private OrderStatus orderStatus; //주문상태
+    private OrderStatus orderStatus;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL
             , orphanRemoval = true, fetch = FetchType.LAZY)
     private List<OrderItemEntity> orderItems = new ArrayList<>();
 
     public void addOrderItem(OrderItemEntity orderItem) {
-        orderItems.add(orderItem);
+        this.orderItems.add(orderItem);
         orderItem.setOrder(this);
+    }
+
+    @Builder
+    public OrderEntity(Long id, MemberEntity member, LocalDateTime orderDate, OrderStatus orderStatus, List<OrderItemEntity> orderItems) {
+        this.id = id;
+        this.member = member;
+        this.orderDate = orderDate;
+        this.orderStatus = orderStatus;
+        this.orderItems = ObjectUtils.isEmpty(orderItems) ? new ArrayList<>() : orderItems;
     }
 
     public static OrderEntity createOrder(MemberEntity member, List<OrderItemEntity> orderItemList) {

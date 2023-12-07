@@ -1,7 +1,7 @@
 package com.shop.adapter.in.web;
 
 import com.shop.adapter.in.web.dto.input.MemberInput;
-import com.shop.application.port.in.SignupMemberUseCase;
+import com.shop.application.port.in.member.SignupMemberUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

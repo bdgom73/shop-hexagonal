@@ -34,7 +34,9 @@ public class SecurityConfig  {
                         authorizeRequests
                                 .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
                                 .requestMatchers("/", "/members/**", "/item/**", "/images/**").permitAll()
+                                .requestMatchers("/test/**").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
+
                                 .anyRequest().authenticated()
                         )
                 .exceptionHandling((exceptionConfig) ->

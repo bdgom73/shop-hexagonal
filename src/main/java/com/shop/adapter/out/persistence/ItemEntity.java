@@ -2,15 +2,14 @@ package com.shop.adapter.out.persistence;
 
 import com.shop.adapter.out.constant.ItemSellStatus;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @Table(name="item")
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 public class ItemEntity extends BaseEntity {
 
     @Id
@@ -33,6 +32,16 @@ public class ItemEntity extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private ItemSellStatus itemSellStatus; //상품 판매 상태
+
+    @Builder
+    public ItemEntity(Long id, String itemNm, int price, int stockNumber, String itemDetail, ItemSellStatus itemSellStatus) {
+        this.id = id;
+        this.itemNm = itemNm;
+        this.price = price;
+        this.stockNumber = stockNumber;
+        this.itemDetail = itemDetail;
+        this.itemSellStatus = itemSellStatus;
+    }
 
     public void removeStock(int stockNumber){
         int restStock = this.stockNumber - stockNumber;

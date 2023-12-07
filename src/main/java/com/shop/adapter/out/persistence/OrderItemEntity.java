@@ -1,11 +1,15 @@
 package com.shop.adapter.out.persistence;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor
+@Table(name="orders_item")
 public class OrderItemEntity extends BaseEntity {
 
     @Id @GeneratedValue
@@ -23,6 +27,15 @@ public class OrderItemEntity extends BaseEntity {
     private int orderPrice; //주문가격
 
     private int count; //수량
+
+    @Builder
+    public OrderItemEntity(Long id, ItemEntity item, OrderEntity order, int orderPrice, int count) {
+        this.id = id;
+        this.item = item;
+        this.order = order;
+        this.orderPrice = orderPrice;
+        this.count = count;
+    }
 
     public static OrderItemEntity createOrderItem(ItemEntity item, int count){
         OrderItemEntity orderItem = new OrderItemEntity();

@@ -5,6 +5,7 @@ import com.querydsl.core.types.dsl.Wildcard;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.shop.adapter.out.constant.ItemSellStatus;
 import com.shop.adapter.out.persistence.ItemEntity;
+import com.shop.adapter.out.persistence.QItemEntity;
 import com.shop.adapter.out.persistence.repository.dto.ItemSearchDto;
 import com.shop.adapter.out.persistence.repository.dto.MainItemDto;
 import com.shop.adapter.out.persistence.repository.dto.QMainItemDto;
@@ -28,39 +29,6 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
         this.queryFactory = new JPAQueryFactory(em);
     }
 
-    private BooleanExpression searchSellStatusEq(ItemSellStatus searchSellStatus){
-        return searchSellStatus == null ? null : itemEntity.itemSellStatus.eq(searchSellStatus);
-    }
-
-    private BooleanExpression regDtsAfter(String searchDateType){
-
-        LocalDateTime dateTime = LocalDateTime.now();
-
-        if(StringUtils.equals("all", searchDateType) || searchDateType == null){
-            return null;
-        } else if(StringUtils.equals("1d", searchDateType)){
-            dateTime = dateTime.minusDays(1);
-        } else if(StringUtils.equals("1w", searchDateType)){
-            dateTime = dateTime.minusWeeks(1);
-        } else if(StringUtils.equals("1m", searchDateType)){
-            dateTime = dateTime.minusMonths(1);
-        } else if(StringUtils.equals("6m", searchDateType)){
-            dateTime = dateTime.minusMonths(6);
-        }
-
-        return itemEntity.regTime.after(dateTime);
-    }
-
-    private BooleanExpression searchByLike(String searchBy, String searchQuery){
-
-        if(StringUtils.equals("itemNm", searchBy)){
-            return itemEntity.itemNm.like("%" + searchQuery + "%");
-        } else if(StringUtils.equals("createdBy", searchBy)){
-            return itemEntity.createdBy.like("%" + searchQuery + "%");
-        }
-
-        return null;
-    }
 
     @Override
     public Page<ItemEntity> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
@@ -122,4 +90,37 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
         return new PageImpl<>(content, pageable, total);
     }
 
+    private BooleanExpression searchSellStatusEq(ItemSellStatus searchSellStatus){
+        return searchSellStatus == null ? null : itemEntity.itemSellStatus.eq(searchSellStatus);
+    }
+
+    private BooleanExpression regDtsAfter(String searchDateType){
+
+        LocalDateTime dateTime = LocalDateTime.now();
+
+        if(StringUtils.equals("all", searchDateType) || searchDateType == null){
+            return null;
+        } else if(StringUtils.equals("1d", searchDateType)){
+            dateTime = dateTime.minusDays(1);
+        } else if(StringUtils.equals("1w", searchDateType)){
+            dateTime = dateTime.minusWeeks(1);
+        } else if(StringUtils.equals("1m", searchDateType)){
+            dateTime = dateTime.minusMonths(1);
+        } else if(StringUtils.equals("6m", searchDateType)){
+            dateTime = dateTime.minusMonths(6);
+        }
+
+        return itemEntity.regTime.after(dateTime);
+    }
+
+    private BooleanExpression searchByLike(String searchBy, String searchQuery){
+
+        if(StringUtils.equals("itemNm", searchBy)){
+            return itemEntity.itemNm.like("%" + searchQuery + "%");
+        } else if(StringUtils.equals("createdBy", searchBy)){
+            return itemEntity.createdBy.like("%" + searchQuery + "%");
+        }
+
+        return null;
+    }
 }
