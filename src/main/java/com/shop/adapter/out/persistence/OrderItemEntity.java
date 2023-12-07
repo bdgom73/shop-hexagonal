@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter
-public class OrderItem extends BaseEntity {
+public class OrderItemEntity extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name = "order_item_id")
@@ -14,18 +14,18 @@ public class OrderItem extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
-    private Item item;
+    private ItemEntity item;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
-    private Order order;
+    private OrderEntity order;
 
     private int orderPrice; //주문가격
 
     private int count; //수량
 
-    public static OrderItem createOrderItem(Item item, int count){
-        OrderItem orderItem = new OrderItem();
+    public static OrderItemEntity createOrderItem(ItemEntity item, int count){
+        OrderItemEntity orderItem = new OrderItemEntity();
         orderItem.setItem(item);
         orderItem.setCount(count);
         orderItem.setOrderPrice(item.getPrice());

@@ -1,4 +1,4 @@
-package com.shop.adapter.out.repository.dto;
+package com.shop.adapter.out.persistence.repository.dto;
 
 import com.shop.adapter.out.constant.ItemSellStatus;
 import lombok.Getter;

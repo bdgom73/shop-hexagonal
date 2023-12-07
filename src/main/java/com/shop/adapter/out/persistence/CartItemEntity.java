@@ -7,7 +7,7 @@ import lombok.Setter;
 @Entity
 @Getter @Setter
 @Table(name="cart_item")
-public class CartItem extends BaseEntity {
+public class CartItemEntity extends BaseEntity {
 
     @Id
     @GeneratedValue
@@ -16,16 +16,16 @@ public class CartItem extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="cart_id")
-    private Cart cart;
+    private CartEntity cart;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
-    private Item item;
+    private ItemEntity item;
 
     private int count;
 
-    public static CartItem createCartItem(Cart cart, Item item, int count) {
-        CartItem cartItem = new CartItem();
+    public static CartItemEntity createCartItem(CartEntity cart, ItemEntity item, int count) {
+        CartItemEntity cartItem = new CartItemEntity();
         cartItem.setCart(cart);
         cartItem.setItem(item);
         cartItem.setCount(count);

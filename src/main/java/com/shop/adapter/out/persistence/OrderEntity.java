@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "orders")
 @Getter @Setter
-public class Order extends BaseEntity {
+public class OrderEntity extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name = "order_id")
@@ -20,7 +20,7 @@ public class Order extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    private Member member;
+    private MemberEntity member;
 
     private LocalDateTime orderDate; //주문일
 
@@ -29,18 +29,18 @@ public class Order extends BaseEntity {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL
             , orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<OrderItem> orderItems = new ArrayList<>();
+    private List<OrderItemEntity> orderItems = new ArrayList<>();
 
-    public void addOrderItem(OrderItem orderItem) {
+    public void addOrderItem(OrderItemEntity orderItem) {
         orderItems.add(orderItem);
         orderItem.setOrder(this);
     }
 
-    public static Order createOrder(Member member, List<OrderItem> orderItemList) {
-        Order order = new Order();
+    public static OrderEntity createOrder(MemberEntity member, List<OrderItemEntity> orderItemList) {
+        OrderEntity order = new OrderEntity();
         order.setMember(member);
 
-        for(OrderItem orderItem : orderItemList) {
+        for(OrderItemEntity orderItem : orderItemList) {
             order.addOrderItem(orderItem);
         }
 
@@ -51,7 +51,7 @@ public class Order extends BaseEntity {
 
     public int getTotalPrice() {
         int totalPrice = 0;
-        for(OrderItem orderItem : orderItems){
+        for(OrderItemEntity orderItem : orderItems){
             totalPrice += orderItem.getTotalPrice();
         }
         return totalPrice;
@@ -59,7 +59,7 @@ public class Order extends BaseEntity {
 
     public void cancelOrder() {
         this.orderStatus = OrderStatus.CANCEL;
-        for (OrderItem orderItem : orderItems) {
+        for (OrderItemEntity orderItem : orderItems) {
             orderItem.cancel();
         }
     }
