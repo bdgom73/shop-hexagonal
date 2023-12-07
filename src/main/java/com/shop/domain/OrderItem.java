@@ -30,4 +30,12 @@ public class OrderItem {
         this.updateTime = updateTime;
     }
 
+    public static OrderItem createOrderItem(Item item, int count){
+        return OrderItem.builder()
+                .count(count)
+                .item(item)
+                .orderPrice(item.getPrice())
+                .build();
+    } 
+
 }

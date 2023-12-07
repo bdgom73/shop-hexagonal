@@ -1,5 +1,6 @@
 package com.shop.adapter.in.config;
 
+import com.shop.adapter.out.constant.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -35,16 +36,15 @@ public class SecurityConfig  {
                                 .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
                                 .requestMatchers("/", "/members/**", "/item/**", "/images/**").permitAll()
                                 .requestMatchers("/test/**").permitAll()
-                                .requestMatchers("/admin/**").hasRole("ADMIN")
+                                .requestMatchers("/admin/**").hasRole(Role.ADMIN.toString())
 
                                 .anyRequest().authenticated()
                         )
                 .exceptionHandling((exceptionConfig) ->
                                 exceptionConfig.authenticationEntryPoint(new CustomAuthenticationEntryPoint())
                         )
-                .csrf((csrf) ->
-                        csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                );
+//                .csrf(AbstractHttpConfigurer::disable);
+                .csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
 
 
         return http.build();
@@ -54,5 +54,4 @@ public class SecurityConfig  {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }

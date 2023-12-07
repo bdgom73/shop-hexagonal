@@ -12,6 +12,7 @@ public class OrderMapper {
                 .orderDate(order.getOrderDate())
                 .orderStatus(order.getOrderStatus())
                 .member(!ObjectUtils.isEmpty(order.getMember()) ? MemberMapper.mapToEntity(order.getMember()) : null)
+                .orderItems(order.getOrderItems().stream().map(OrderItemMapper::mapToEntity).toList())
                 .build();
     }
 

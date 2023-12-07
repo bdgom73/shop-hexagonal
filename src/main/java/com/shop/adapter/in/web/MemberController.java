@@ -1,6 +1,6 @@
 package com.shop.adapter.in.web;
 
-import com.shop.adapter.in.web.dto.input.MemberInput;
+import com.shop.adapter.in.web.dto.command.MemberCommand;
 import com.shop.application.port.in.member.SignupMemberUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,20 +21,18 @@ public class MemberController {
 
     @GetMapping(value = "/new")
     public String memberForm(Model model){
-        model.addAttribute("memberInput", new MemberInput());
+        model.addAttribute("memberInput", new MemberCommand());
         return "member/memberForm";
     }
 
     @PostMapping(value = "/new")
-    public String newMember(@ModelAttribute("memberInput") @Valid MemberInput input, BindingResult bindingResult, Model model){
-
-        System.out.println("input = " + input);
+    public String newMember(@ModelAttribute("memberInput") @Valid MemberCommand input, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()){
             return "member/memberForm";
         }
 
         try {
-            loadMemberUseCase.signup(input);
+            loadMemberUseCase.signup(input.toRequest());
         } catch (IllegalStateException e){
             model.addAttribute("errorMessage", e.getMessage());
             return "member/memberForm";

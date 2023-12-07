@@ -5,7 +5,6 @@ import com.querydsl.core.types.dsl.Wildcard;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.shop.adapter.out.constant.ItemSellStatus;
 import com.shop.adapter.out.persistence.ItemEntity;
-import com.shop.adapter.out.persistence.QItemEntity;
 import com.shop.adapter.out.persistence.repository.dto.ItemSearchDto;
 import com.shop.adapter.out.persistence.repository.dto.MainItemDto;
 import com.shop.adapter.out.persistence.repository.dto.QMainItemDto;
@@ -18,8 +17,8 @@ import org.thymeleaf.util.StringUtils;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.shop.adapter.out.persistence.QItemEntity.*;
-import static com.shop.adapter.out.persistence.QItemImgEntity.*;
+import static com.shop.adapter.out.persistence.QItemEntity.itemEntity;
+import static com.shop.adapter.out.persistence.QItemImgEntity.itemImgEntity;
 
 public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
 
@@ -28,7 +27,6 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
     public ItemRepositoryCustomImpl(EntityManager em){
         this.queryFactory = new JPAQueryFactory(em);
     }
-
 
     @Override
     public Page<ItemEntity> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
@@ -88,6 +86,13 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
                 ;
 
         return new PageImpl<>(content, pageable, total);
+    }
+
+    @Override
+    public void updateStockNumber(Long itemId, int stockNumber) {
+        queryFactory.update(itemEntity)
+                .set(itemEntity.stockNumber, stockNumber)
+                .where(itemEntity.id.eq(itemId));
     }
 
     private BooleanExpression searchSellStatusEq(ItemSellStatus searchSellStatus){

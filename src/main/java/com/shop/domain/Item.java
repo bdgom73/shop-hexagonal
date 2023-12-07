@@ -1,7 +1,7 @@
 package com.shop.domain;
 
 import com.shop.adapter.out.constant.ItemSellStatus;
-import com.shop.adapter.out.persistence.ItemEntity;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -29,14 +29,23 @@ public class Item {
 
     private LocalDateTime updateTime;
 
-    public Item(ItemEntity entity) {
-        this.id = entity.getId();
-        this.itemNm = entity.getItemNm();
-        this.price = entity.getPrice();
-        this.stockNumber = entity.getStockNumber();
-        this.itemDetail = entity.getItemDetail();
-        this.itemSellStatus = entity.getItemSellStatus();
-        this.regTime = entity.getRegTime();
-        this.updateTime = entity.getUpdateTime();
+    @Builder
+    public Item(Long id, String itemNm, int price, int stockNumber, String itemDetail, ItemSellStatus itemSellStatus, LocalDateTime regTime, LocalDateTime updateTime) {
+        this.id = id;
+        this.itemNm = itemNm;
+        this.price = price;
+        this.stockNumber = stockNumber;
+        this.itemDetail = itemDetail;
+        this.itemSellStatus = itemSellStatus;
+        this.regTime = regTime;
+        this.updateTime = updateTime;
+    }
+
+    public void removeStock(int stockNumber){
+        int restStock = this.stockNumber - stockNumber;
+        if(restStock < 0){
+            throw new IllegalArgumentException("상품의 재고가 부족 합니다. (현재 재고 수량: " + this.stockNumber + ")");
+        }
+        this.stockNumber = restStock;
     }
 }

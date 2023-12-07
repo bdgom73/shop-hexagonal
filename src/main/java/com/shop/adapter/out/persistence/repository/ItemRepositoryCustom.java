@@ -12,4 +12,6 @@ public interface ItemRepositoryCustom {
     Page<ItemEntity> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable);
 
     Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable);
+
+    void updateStockNumber(Long itemId, int stockNumber);
 }

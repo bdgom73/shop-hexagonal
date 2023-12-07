@@ -17,6 +17,16 @@ public class ItemMapper {
     }
 
     public static Item mapToDomain(ItemEntity entity) {
-        return new Item(entity);
+        return Item.builder()
+                .id(entity.getId())
+                .itemNm(entity.getItemNm())
+                .price(entity.getPrice())
+                .stockNumber(entity.getStockNumber())
+                .itemDetail(entity.getItemDetail())
+                .itemSellStatus(entity.getItemSellStatus())
+                .regTime(entity.getRegTime())
+                .updateTime(entity.getUpdateTime())
+                .build();
+
     }
 }

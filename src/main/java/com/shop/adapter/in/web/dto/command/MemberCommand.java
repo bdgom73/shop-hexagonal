@@ -1,7 +1,6 @@
-package com.shop.adapter.in.web.dto.input;
+package com.shop.adapter.in.web.dto.command;
 
-import com.shop.adapter.out.constant.Role;
-import com.shop.domain.Member;
+import com.shop.application.dto.request.MemberRequest;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -12,7 +11,7 @@ import org.hibernate.validator.constraints.Length;
 
 @Getter @Setter
 @ToString
-public class MemberInput {
+public class MemberCommand {
     @NotBlank(message = "이름은 필수 입력 값입니다.")
     private String name;
 
@@ -27,13 +26,12 @@ public class MemberInput {
     @NotEmpty(message = "주소는 필수 입력 값입니다.")
     private String address;
 
-    public Member toDomain() {
-        return Member.builder()
+    public MemberRequest toRequest() {
+        return MemberRequest.builder()
                 .name(this.name)
                 .email(this.email)
                 .password(this.password)
                 .address(this.address)
-                .role(Role.USER)
                 .build();
     }
 }

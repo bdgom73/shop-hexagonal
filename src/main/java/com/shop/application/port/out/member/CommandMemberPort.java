@@ -1,9 +1,6 @@
 package com.shop.application.port.out.member;
 
-import com.shop.adapter.in.web.dto.input.MemberInput;
 import com.shop.domain.Member;
-
-import java.util.Optional;
 
 public interface CommandMemberPort {
     Member save(Member member);
