@@ -2,8 +2,10 @@ package com.shop.domain;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class ItemImage {
 
     private Long id;

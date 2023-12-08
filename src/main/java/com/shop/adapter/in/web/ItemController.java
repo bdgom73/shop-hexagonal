@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -31,9 +30,15 @@ public class ItemController {
 
     @PostMapping(value = "/admin/item/new")
     public String itemNew(@ModelAttribute("itemFormDto") @Valid ItemFormDto itemFormDto,
-                          @RequestParam(value = "itemImgFile", required = false) List<MultipartFile> itemImgFileList,
+                          @RequestParam(value = "itemImgFile") List<MultipartFile> itemImgFileList,
                           BindingResult bindingResult,
                           Model model) {
+
+        System.out.println("itemFormDto = " + itemImgFileList.size());
+        for (MultipartFile multipartFile : itemImgFileList) {
+            System.out.println("multipartFile = " + multipartFile.getOriginalFilename());
+        }
+
         if (bindingResult.hasErrors()) {
             return "item/itemForm";
         }
@@ -50,7 +55,7 @@ public class ItemController {
                             itemFormDto.price(),
                             itemFormDto.itemDetail(),
                             itemFormDto.stockNumber(),
-                            new ArrayList<>()
+                            itemImgFileList
                     )
             );
         } catch (Exception e) {

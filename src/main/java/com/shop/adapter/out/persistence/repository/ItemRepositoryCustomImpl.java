@@ -57,7 +57,6 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
 
     @Override
     public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
-
         List<MainItemDto> content = queryFactory
                 .select(
                         new QMainItemDto(
