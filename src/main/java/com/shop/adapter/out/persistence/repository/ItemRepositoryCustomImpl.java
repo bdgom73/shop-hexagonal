@@ -1,6 +1,7 @@
 package com.shop.adapter.out.persistence.repository;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.Wildcard;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.shop.adapter.out.constant.ItemSellStatus;
@@ -18,7 +19,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.shop.adapter.out.persistence.QItemEntity.itemEntity;
-import static com.shop.adapter.out.persistence.QItemImgEntity.itemImgEntity;
 
 public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
 
@@ -64,12 +64,14 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
                                 itemEntity.id,
                                 itemEntity.itemNm,
                                 itemEntity.itemDetail,
-                                itemImgEntity.imgUrl,
+//                                itemImgEntity.imgUrl,
+                                Expressions.asString(""),
                                 itemEntity.price)
                 )
-                .from(itemImgEntity)
-                .join(itemImgEntity.item, itemEntity)
-                .where(itemImgEntity.repimgYn.eq("Y"))
+                .from(itemEntity)
+//                .from(itemImgEntity)
+//                .join(itemImgEntity.item, itemEntity)
+//                .where(itemImgEntity.repimgYn.eq("Y"))
                 .where(itemNmLike(itemSearchDto.getSearchQuery()))
                 .orderBy(itemEntity.id.desc())
                 .offset(pageable.getOffset())
@@ -78,9 +80,10 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
 
         long total = queryFactory
                 .select(Wildcard.count)
-                .from(itemImgEntity)
-                .join(itemImgEntity.item, itemEntity)
-                .where(itemImgEntity.repimgYn.eq("Y"))
+                .from(itemEntity)
+//                .from(itemImgEntity)
+//                .join(itemImgEntity.item, itemEntity)
+//                .where(itemImgEntity.repimgYn.eq("Y"))
                 .where(itemNmLike(itemSearchDto.getSearchQuery()))
                 .fetchOne()
                 ;

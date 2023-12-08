@@ -3,11 +3,15 @@ package com.shop.adapter.out.persistence.adapter;
 import com.shop.adapter.out.persistence.ItemEntity;
 import com.shop.adapter.out.persistence.mapper.ItemMapper;
 import com.shop.adapter.out.persistence.repository.ItemRepository;
+import com.shop.adapter.out.persistence.repository.dto.ItemSearchDto;
+import com.shop.adapter.out.persistence.repository.dto.MainItemDto;
 import com.shop.application.port.out.item.CommandItemPort;
 import com.shop.application.port.out.item.LoadItemPort;
 import com.shop.domain.Item;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -33,6 +37,11 @@ public class ItemPersistenceAdapter
                 .stream()
                 .map(ItemMapper::mapToDomain)
                 .toList();
+    }
+
+    @Override
+    public Page<MainItemDto> loadMainItem(ItemSearchDto itemSearchDto, Pageable pageable) {
+        return itemRepository.getMainItemPage(itemSearchDto, pageable);
     }
 
     @Override

@@ -2,14 +2,10 @@ package com.shop.adapter.out.persistence.mapper;
 
 import com.shop.adapter.out.persistence.OrderItemEntity;
 import com.shop.domain.OrderItem;
-import org.springframework.util.ObjectUtils;
 
 public class OrderItemMapper {
 
     /**
-     * - 연관 관계
-     * > 아이템 테이블
-     *
      * 도메인 객체를 엔티티 객체로 변환
      * @param orderItem 주문 상품 도메인 객체
      * */
@@ -18,7 +14,7 @@ public class OrderItemMapper {
                 .id(orderItem.getId())
                 .count(orderItem.getCount())
                 .orderPrice(orderItem.getOrderPrice())
-                .item(!ObjectUtils.isEmpty(orderItem.getItem()) ? ItemMapper.mapToEntity(orderItem.getItem()) : null)
+                .item(ItemMapper.mapToEntity(orderItem.getItem()))
                 .build();
     }
 
