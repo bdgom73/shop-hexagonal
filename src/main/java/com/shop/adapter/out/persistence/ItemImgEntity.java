@@ -1,6 +1,7 @@
 package com.shop.adapter.out.persistence;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,11 +26,17 @@ public class ItemImgEntity extends BaseEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private ItemEntity item;
+    public ItemImgEntity() {
+    }
 
-    public void updateItemImg(String oriImgName, String imgName, String imgUrl){
-        this.oriImgName = oriImgName;
+    @Builder
+    public ItemImgEntity(Long id, String imgName, String oriImgName, String imgUrl, String repimgYn, ItemEntity item) {
+        this.id = id;
         this.imgName = imgName;
+        this.oriImgName = oriImgName;
         this.imgUrl = imgUrl;
+        this.repimgYn = repimgYn;
+        this.item = item;
     }
 
 }
