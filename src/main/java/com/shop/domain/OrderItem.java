@@ -31,6 +31,7 @@ public class OrderItem {
     }
 
     public static OrderItem createOrderItem(Item item, int count){
+        item.removeStock(count);
         return OrderItem.builder()
                 .count(count)
                 .item(item)

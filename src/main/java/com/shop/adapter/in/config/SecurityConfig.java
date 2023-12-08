@@ -43,7 +43,7 @@ public class SecurityConfig  {
                 .exceptionHandling((exceptionConfig) ->
                                 exceptionConfig.authenticationEntryPoint(new CustomAuthenticationEntryPoint())
                         )
-//                .csrf(AbstractHttpConfigurer::disable);
+//                .csrf(csrf -> csrf.disable());
                 .csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
 
 

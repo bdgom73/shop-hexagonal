@@ -43,6 +43,10 @@ public class ItemEntity extends BaseEntity {
         this.itemSellStatus = itemSellStatus;
     }
 
+    public void changeStockNumber(int stockNumber) {
+        this.stockNumber = stockNumber;
+    }
+
     public void removeStock(int stockNumber){
         int restStock = this.stockNumber - stockNumber;
         if(restStock < 0){
