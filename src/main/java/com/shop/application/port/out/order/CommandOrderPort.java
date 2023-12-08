@@ -4,4 +4,5 @@ import com.shop.domain.Order;
 
 public interface CommandOrderPort {
     Order save(Order order);
+    Order cancel(Long orderId);
 }
