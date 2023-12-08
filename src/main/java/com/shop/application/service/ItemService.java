@@ -11,6 +11,7 @@ import com.shop.application.port.out.item.CommandItemPort;
 import com.shop.application.port.out.item.LoadItemPort;
 import com.shop.domain.Item;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -28,21 +29,25 @@ public class ItemService implements
         GetItemUseCase
 {
 
+    @Value("${itemImgLocation}")
+    private String itemImgLocation;
+
     private final CommandItemPort commandItemPort;
     private final ApplicationEventPublisher publisher;
     private final LoadItemPort loadItemPort;
 
     @Override
+    @Transactional
     public Long save(SaveItemCommand saveItemCommand) {
 
         // 상품 등록
         Item item = saveItemCommand.toDomain();
-        Long id = commandItemPort.save(item).getId();
+        Item saveItem = commandItemPort.save(item);
 
         // 이미지 등록
-        publisher.publishEvent(new SavedItemEvent(item, saveItemCommand.files()));
+        publisher.publishEvent(new SavedItemEvent(saveItem, saveItemCommand.files()));
 
-        return id;
+        return saveItem.getId();
     }
 
     @Override

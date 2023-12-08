@@ -33,7 +33,6 @@ public class MainController {
         Pageable pageable = PageRequest.of(page.orElse(0), 6);
         Page<HomeItemDto> items = getItemUseCase.getMainItemPage(itemSearchCommand.toRequest(), pageable);
 
-        List<HomeItemDto> content = items.getContent();
         model.addAttribute("items", items);
         model.addAttribute("itemSearchDto", itemSearchCommand);
         model.addAttribute("maxPage", 5);

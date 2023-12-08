@@ -12,10 +12,12 @@ public record ItemFormDto(Long id,
                           @NotBlank(message = "상품 상세는 필수 입력 값입니다.") String itemDetail,
                           @NotNull(message = "재고는 필수 입력 값입니다.") Integer stockNumber,
                           ItemSellStatus itemSellStatus,
-                          List<Long> itemImgIds) {
+                          List<Long> itemImgIds,
+                          List<ItemImgDto> itemImgDtoList
+                          ) {
 
 
     public static ItemFormDto empty() {
-        return new ItemFormDto(null, null, null, null, null, null, null);
+        return new ItemFormDto(null, null, null, null, null, null, null, null);
     }
 }

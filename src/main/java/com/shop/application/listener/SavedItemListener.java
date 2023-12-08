@@ -41,8 +41,11 @@ public class SavedItemListener {
 
         boolean isFirst = true;
         for (MultipartFile file : event.files()) {
-            String originalFileName = file.getOriginalFilename();
+            if (file.isEmpty()) {
+                continue;
+            }
 
+            String originalFileName = file.getOriginalFilename();
             String imageName = fileService.uploadFile(itemImageLocation, originalFileName, file.getBytes());
             itemImages.add(
                     ItemImage.builder()
