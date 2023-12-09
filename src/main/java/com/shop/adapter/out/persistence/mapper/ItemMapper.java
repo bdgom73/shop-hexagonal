@@ -6,7 +6,6 @@ import com.shop.domain.Item;
 public class ItemMapper {
 
     /**
-     * 연관 관계가 없음.
      * 도메인 객체를 엔티티 객체로 변환
      * @param item 아이템 도메인 객체
      * */

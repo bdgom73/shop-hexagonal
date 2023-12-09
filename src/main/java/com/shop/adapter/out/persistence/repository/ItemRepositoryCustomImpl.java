@@ -5,7 +5,7 @@ import com.querydsl.core.types.dsl.Wildcard;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.shop.adapter.out.constant.ItemSellStatus;
 import com.shop.adapter.out.persistence.ItemEntity;
-import com.shop.adapter.out.persistence.repository.dto.ItemSearchDto;
+import com.shop.adapter.out.persistence.repository.dto.ItemSearch;
 import com.shop.adapter.out.persistence.repository.dto.MainItemDto;
 import com.shop.adapter.out.persistence.repository.dto.QMainItemDto;
 import jakarta.persistence.EntityManager;
@@ -29,7 +29,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
     }
 
     @Override
-    public Page<ItemEntity> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
+    public Page<ItemEntity> getAdminItemPage(ItemSearch itemSearchDto, Pageable pageable) {
 
         List<ItemEntity> content = queryFactory
                 .selectFrom(itemEntity)
@@ -56,7 +56,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
     }
 
     @Override
-    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
+    public Page<MainItemDto> getMainItemPage(ItemSearch itemSearchDto, Pageable pageable) {
         List<MainItemDto> content = queryFactory
                 .select(
                         new QMainItemDto(

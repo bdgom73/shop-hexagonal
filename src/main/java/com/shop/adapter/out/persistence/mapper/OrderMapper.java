@@ -7,10 +7,10 @@ import org.springframework.util.ObjectUtils;
 public class OrderMapper {
 
     /**
-     * - 연관 관계
-     * > 회원 테이블
-     * > 주문 아이템 테이블
-     *
+     * 연관 관계
+     * - 회원 테이블
+     * - 주문 아이템 테이블
+     * <br/>
      * 도메인 객체를 엔티티 객체로 변환
      * @param order 주문 도메인 객체
      * */
@@ -39,9 +39,9 @@ public class OrderMapper {
     }
 
     /**
-     * > 연관 관계
+     * 연관 관계
      * - 회원 테이블
-     *
+     * <br/>
      * 엔티티 객체를 도메인 객체로 변환
      * @param entity 주문 엔티티 객체
      * */
@@ -57,9 +57,9 @@ public class OrderMapper {
     }
 
     /**
-     * > 연관 관계
+     * 연관 관계
      * - 주문 상품 테이블
-     *
+     * <br/>
      * 엔티티 객체를 도메인 객체로 변환
      * @param entity 주문 엔티티 객체
      * */
