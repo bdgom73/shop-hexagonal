@@ -45,6 +45,12 @@ public class ItemPersistenceAdapter
     }
 
     @Override
+    public Page<Item> loadAdminItem(ItemSearch itemSearch, Pageable pageable) {
+        return itemRepository.getAdminItemPage(itemSearch, pageable)
+                .map(ItemMapper::mapToDomain);
+    }
+
+    @Override
     public Item save(Item item) {
         ItemEntity itemEntity = itemRepository.save(ItemMapper.mapToEntity(item));
         return ItemMapper.mapToDomain(itemEntity);
@@ -56,4 +62,13 @@ public class ItemPersistenceAdapter
                 .orElseThrow(EntityNotFoundException::new);
         itemEntity.changeStockNumber(item.getStockNumber());
     }
+
+    @Override
+    public Item updateItem(Item item) {
+        ItemEntity itemEntity = itemRepository.findById(item.getId())
+                .orElseThrow(EntityNotFoundException::new);
+        itemEntity.update(ItemMapper.mapToEntity(item));
+        return ItemMapper.mapToDomain(itemEntity);
+    }
+
 }

@@ -59,4 +59,11 @@ public class ItemEntity extends BaseEntity {
         this.stockNumber += stockNumber;
     }
 
+    public void update(ItemEntity itemEntity) {
+        this.itemNm = itemEntity.getItemNm();
+        this.price = itemEntity.getPrice();
+        this.stockNumber = itemEntity.getStockNumber();
+        this.itemDetail = itemEntity.getItemDetail();
+        this.itemSellStatus = itemEntity.getItemSellStatus();
+    }
 }
