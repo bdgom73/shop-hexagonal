@@ -5,6 +5,7 @@ import com.shop.adapter.out.persistence.ItemImgEntity;
 import com.shop.adapter.out.persistence.mapper.ItemImageMapper;
 import com.shop.adapter.out.persistence.repository.ItemImgRepository;
 import com.shop.adapter.out.persistence.repository.ItemRepository;
+import com.shop.application.port.out.item.LoadItemImagePort;
 import com.shop.application.port.out.item.SaveItemImagePort;
 import com.shop.domain.ItemImage;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,9 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class ItemImageAdapter implements SaveItemImagePort {
+public class ItemImageAdapter
+        implements SaveItemImagePort,
+        LoadItemImagePort {
 
     private final ItemRepository itemRepository;
     private final ItemImgRepository itemImageRepository;
@@ -31,4 +34,13 @@ public class ItemImageAdapter implements SaveItemImagePort {
         List<ItemImgEntity> list = itemImages.stream().map((element) -> ItemImageMapper.mapToEntity(element, itemEntity)).toList();
         itemImageRepository.saveAll(list);
     }
+
+    @Override
+    public List<ItemImage> loadAllByItemIdOrderByIdAsc(Long itemId) {
+        return itemImageRepository.findByItemIdOrderByIdAsc(itemId)
+                .stream()
+                .map(ItemImageMapper::mapToDomain)
+                .toList();
+    }
+
 }

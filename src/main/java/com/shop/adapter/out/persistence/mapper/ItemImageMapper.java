@@ -2,7 +2,6 @@ package com.shop.adapter.out.persistence.mapper;
 
 import com.shop.adapter.out.persistence.ItemEntity;
 import com.shop.adapter.out.persistence.ItemImgEntity;
-import com.shop.domain.Item;
 import com.shop.domain.ItemImage;
 
 public class ItemImageMapper {
@@ -18,17 +17,14 @@ public class ItemImageMapper {
                 .build();
     }
 
-    public static Item mapToDomain(ItemEntity entity) {
-        return Item.builder()
+    public static ItemImage mapToDomain(ItemImgEntity entity) {
+        return ItemImage.builder()
                 .id(entity.getId())
-                .itemNm(entity.getItemNm())
-                .price(entity.getPrice())
-                .stockNumber(entity.getStockNumber())
-                .itemDetail(entity.getItemDetail())
-                .itemSellStatus(entity.getItemSellStatus())
-                .regTime(entity.getRegTime())
-                .updateTime(entity.getUpdateTime())
+                .imageName(entity.getImgName())
+                .imageUrl(entity.getImgUrl())
+                .isRepresentative(entity.getRepimgYn().equals("Y"))
+                .originalFileName(entity.getOriImgName())
+                .item(ItemMapper.mapToDomain(entity.getItem()))
                 .build();
-
     }
 }

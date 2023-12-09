@@ -1,5 +1,6 @@
 package com.shop.application.dto.request;
 
+import com.shop.adapter.in.web.dto.ItemImgDto;
 import com.shop.adapter.out.constant.ItemSellStatus;
 import com.shop.domain.Item;
 import lombok.Builder;
@@ -27,7 +28,7 @@ public class ItemFormRequest {
 
     private ItemSellStatus itemSellStatus;
 
-//    private List<ItemImgDto> itemImgDtoList = new ArrayList<>();
+    private List<ItemImgDto> itemImgDtoList = new ArrayList<>();
 
     private List<Long> itemImgIds = new ArrayList<>();
 

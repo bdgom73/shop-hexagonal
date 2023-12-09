@@ -15,4 +15,6 @@ public interface LoadItemPort {
     List<Item> loadAllByIn(List<Long> ids);
 
     Page<MainItemDto> loadMainItem(ItemSearch itemSearchDto, Pageable pageable);
+
+    Page<Item> loadAdminItem(ItemSearch itemSearch, Pageable pageable);
 }
