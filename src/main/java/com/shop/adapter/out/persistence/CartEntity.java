@@ -1,15 +1,13 @@
 package com.shop.adapter.out.persistence;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @Table(name = "cart")
 @Getter @Setter
 @ToString
+@NoArgsConstructor
 public class CartEntity extends BaseEntity {
 
     @Id
