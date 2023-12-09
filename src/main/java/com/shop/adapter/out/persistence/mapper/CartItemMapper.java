@@ -45,7 +45,7 @@ public class CartItemMapper {
                 .id(entity.getId())
                 .count(entity.getCount())
                 .item(ItemMapper.mapToDomain(entity.getItem()))
-                .cart(CartMapper.mapToDomain(entity.getCart()))
+                .cart(CartMapper.mapToDomainWithMember(entity.getCart()))
                 .updateTime(entity.getUpdateTime())
                 .regTime(entity.getRegTime())
                 .build();

@@ -26,4 +26,17 @@ public class CartItem {
         this.regTime = regTime;
         this.updateTime = updateTime;
     }
+
+    public static CartItem createCartItem(Cart cart, Item item, int count) {
+        return CartItem.builder()
+                .id(null)
+                .cart(cart)
+                .item(item)
+                .count(count)
+                .build();
+    }
+
+    public void addCount(int count){
+        this.count += count;
+    }
 }

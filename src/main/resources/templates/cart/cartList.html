@@ -161,6 +161,12 @@
             });
         }
 
+        document.addEventListener("DOMContentLoaded", () => {
+            const orderBtn = document.getElementById("order-btn");
+            orderBtn.addEventListener("click", () => {
+                orders();
+            })
+        })
     </script>
 
 </th:block>
@@ -256,11 +262,10 @@
         </h2>
 
         <div class="text-center mt-3">
-            <button type="button" class="btn btn-primary btn-lg" onclick="orders()">주문하기</button>
+            <button type="button" class="btn btn-primary btn-lg" id="order-btn">주문하기</button>
         </div>
 
     </div>
 
 </div>
-
 </html>
