@@ -3,7 +3,7 @@ package com.shop.adapter.out.persistence.adapter;
 import com.shop.adapter.out.persistence.ItemEntity;
 import com.shop.adapter.out.persistence.mapper.ItemMapper;
 import com.shop.adapter.out.persistence.repository.ItemRepository;
-import com.shop.adapter.out.persistence.repository.dto.ItemSearchDto;
+import com.shop.adapter.out.persistence.repository.dto.ItemSearch;
 import com.shop.adapter.out.persistence.repository.dto.MainItemDto;
 import com.shop.application.port.out.item.CommandItemPort;
 import com.shop.application.port.out.item.LoadItemPort;
@@ -40,7 +40,7 @@ public class ItemPersistenceAdapter
     }
 
     @Override
-    public Page<MainItemDto> loadMainItem(ItemSearchDto itemSearchDto, Pageable pageable) {
+    public Page<MainItemDto> loadMainItem(ItemSearch itemSearchDto, Pageable pageable) {
         return itemRepository.getMainItemPage(itemSearchDto, pageable);
     }
 

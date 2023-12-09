@@ -1,6 +1,7 @@
 package com.shop.adapter.out.persistence;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -26,4 +27,9 @@ public class CartEntity extends BaseEntity {
         return cart;
     }
 
+    @Builder
+    public CartEntity(Long id, MemberEntity member) {
+        this.id = id;
+        this.member = member;
+    }
 }

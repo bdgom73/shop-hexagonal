@@ -1,7 +1,7 @@
 package com.shop.application.dto.request;
 
 import com.shop.adapter.out.constant.ItemSellStatus;
-import com.shop.adapter.out.persistence.repository.dto.ItemSearchDto;
+import com.shop.adapter.out.persistence.repository.dto.ItemSearch;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,8 +26,8 @@ public class ItemSearchRequest {
         this.searchQuery = searchQuery;
     }
 
-    public ItemSearchDto toDto() {
-        return ItemSearchDto.builder()
+    public ItemSearch toDto() {
+        return ItemSearch.builder()
                 .searchDateType(searchDateType)
                 .searchQuery(searchQuery)
                 .searchSellStatus(searchSellStatus)

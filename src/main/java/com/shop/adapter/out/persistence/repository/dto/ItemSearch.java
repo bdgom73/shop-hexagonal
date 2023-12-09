@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class ItemSearchDto {
+public class ItemSearch {
 
     private String searchDateType;
 
@@ -17,7 +17,7 @@ public class ItemSearchDto {
     private String searchQuery = "";
 
     @Builder
-    public ItemSearchDto(String searchDateType, ItemSellStatus searchSellStatus, String searchBy, String searchQuery) {
+    public ItemSearch(String searchDateType, ItemSellStatus searchSellStatus, String searchBy, String searchQuery) {
         this.searchDateType = searchDateType;
         this.searchSellStatus = searchSellStatus;
         this.searchBy = searchBy;
