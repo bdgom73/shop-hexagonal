@@ -1,7 +1,7 @@
 package com.shop.application.port.out.cart;
 
+import com.shop.domain.Cart;
+
 public interface CommandCartPort {
-
-    void save();
-
+    Cart save(Cart cart);
 }

@@ -22,4 +22,10 @@ public class Cart {
         this.regTime = regTime;
         this.updateTime = updateTime;
     }
+
+    public static Cart createCart(Member member){
+        return Cart.builder()
+                .member(member)
+                .build();
+    }
 }
